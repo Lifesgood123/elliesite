@@ -19,6 +19,14 @@ def send_home():
 def print_ver():
     return f"paste this into your terminal: {request.args.get('oauth_verifier')}"
 
+@app.route('/reademail')
+def read_email():
+    emailaddress = request.args.get("address")
+    subjectline = request.args.get("subject")
+    with open('/home/ellie/elliesite/emaillog.txt', 'a') as f:
+        f.write(f'{subject} opened by {emailaddress}')
+    return send_from_directory('/src', '1x1.png')
+
 @app.route('/EG')
 def send_EG_file():
     return send_from_directory('EG', request.args.get('file'))
